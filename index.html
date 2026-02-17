@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Parents ❤️</title>
+
+<style>
+/* GENERAL */
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+/* FLOATING HEARTS FIRST PAGE */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 5s linear infinite;
+  user-select: none;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh);} 
+  100% {transform: translateY(-10vh);} 
+}
+
+/* LOGIN */
+#login {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+}
+
+input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, purple, hotpink);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+/* SECOND PAGE */
+#content {
+  display: none;
+  background: linear-gradient(#c25a78, #e08aa3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  color: black;
+  overflow-y: auto;
+  padding-bottom: 150px;
+}
+
+/* BIG BLACK HEARTS */
+.inner-heart {
+  position: absolute;
+  font-size: 28px;
+  color: black;
+  animation: fastFloat 6s linear infinite;
+}
+
+/* BIG BLACK RIBBONS */
+.ribbon {
+  position: absolute;
+  font-size: 48px;
+  color: black;
+  animation: fastFloat 7s linear infinite;
+}
+
+@keyframes fastFloat {
+  0% { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* MEMORY CARDS */
+.memory {
+  margin: 70px auto;
+  width: 85%;
+  max-width: 420px;
+  text-align: center;
+  background: rgba(255,255,255,0.25);
+  padding: 22px;
+  border-radius: 22px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s ease;
+}
+
+.memory.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.memory img {
+  width: 75%;
+  max-width: 300px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: 0.5s;
+}
+
+.memory img:hover {
+  transform: scale(1.08);
+}
+
+/* CHIBI */
+#chibi {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-align: center;
+}
+
+#chibi img {
+  width: 210px;
+}
+
+.bubble {
+  background: purple;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 25px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  animation: floatBubble 2s infinite alternate;
+}
+
+@keyframes floatBubble {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <h1>Enter Password 💖</h1>
+  <input type="password" id="password" placeholder="Hint: anniversary">
+  <br><br>
+  <button id="enterBtn">Enter</button>
+</div>
+
+<!-- SECOND PAGE -->
+<div id="content">
+  <h1 style="margin-top: 110px;">I Love You Mom & Dad ❤️</h1>
+  <p style="padding:0 20px;">
+  Happy anniversary Mom and Dad. It's been 10 beautiful years. I hope there are many more happy and loving years waiting for you. Thank you for always loving us so much. We are lucky to have you both i hope u both always smilee . ❤️
+  </p>
+
+  <!-- PHOTOS -->
+  <div class="memory">
+    <img src="pic1.jpg">
+    <p>You make us stronger 💖</p>
+  </div>
+
+  <div class="memory">
+    <img src="pic2.jpg">
+    <p>Every moment with you both is special 🥺</p>
+  </div>
+
+  <div class="memory">
+    <img src="pic3.jpg">
+    <p>Thank you for loving us so much ❤️</p>
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- CHIBI -->
+<div id="chibi">
+  <div class="bubble">Hello Mom & Dad 👋</div>
+  <img src="download.gif">
+</div>
+
+<script>
+
+/* FLOATING HEARTS */
+const colors = ["#ff4d6d", "#a855f7"];
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.innerHTML = "❤";
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 25 + 15 + "px";
+  heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 230);
+
+/* CURSOR TRAIL */
+document.addEventListener("mousemove", function(e) {
+  const trail = document.createElement("div");
+  trail.innerHTML = "💜";
+  trail.style.position = "absolute";
+  trail.style.left = e.pageX + "px";
+  trail.style.top = e.pageY + "px";
+  trail.style.pointerEvents = "none";
+  trail.style.fontSize = "14px";
+  trail.style.transition = "all 0.8s ease";
+  trail.style.opacity = 1;
+  document.body.appendChild(trail);
+
+  setTimeout(() => {
+    trail.style.top = (e.pageY - 30) + "px";
+    trail.style.opacity = 0;
+  }, 10);
+
+  setTimeout(() => trail.remove(), 800);
+});
+
+/* SECOND PAGE ANIMATION */
+function startInnerAnimation() {
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "🖤";
+    heart.classList.add("inner-heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    document.getElementById("content").appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }, 280);
+
+  setInterval(() => {
+    const ribbon = document.createElement("div");
+    ribbon.innerHTML = "🎀";
+    ribbon.classList.add("ribbon");
+    ribbon.style.left = Math.random() * 100 + "vw";
+    document.getElementById("content").appendChild(ribbon);
+    setTimeout(() => ribbon.remove(), 9000);
+  }, 360);
+}
+
+/* FADE MEMORIES */
+function revealMemories() {
+  const memories = document.querySelectorAll(".memory");
+
+  memories.forEach(memory => {
+    const top = memory.getBoundingClientRect().top;
+    const screenHeight = window.innerHeight;
+
+    if (top < screenHeight - 100) {
+      memory.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealMemories);
+
+/* PASSWORD + MUSIC */
+const btn = document.getElementById("enterBtn");
+const music = document.getElementById("bgMusic");
+
+btn.addEventListener("click", () => {
+  const pass = document.getElementById("password").value;
+
+  if (pass === "10years") {
+
+    music.volume = 0.7;
+    music.play().catch(() => {});
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("content").style.display = "block";
+
+    startInnerAnimation();
+    revealMemories();
+
+  } else {
+    alert("Wrong password 😢");
+  }
+});
+
+</script>
+
+</body>
+</html>
