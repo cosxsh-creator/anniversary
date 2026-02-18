@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Surprise Quiz 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    background: black;
+    overflow: hidden;
+    color: white;
+  }
+
+  /* cute floating emojis */
+  .emoji {
+    position: fixed;
+    font-size: 22px;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+    20% {opacity: 1;}
+    to {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
+  }
+
+  .quiz-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+  }
+
+  .question-box {
+    background: #7c3aed;
+    padding: 30px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.7);
+    margin-bottom: 25px;
+  }
+
+  .option {
+    background: #a78bfa;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .option:hover {
+    transform: scale(1.05);
+  }
+
+  .correct {
+    background: #22c55e !important;
+  }
+
+  .wrong {
+    background: #ef4444 !important;
+  }
+
+  .final {
+    display: none;
+    font-size: 28px;
+    color: #f472b6;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+  <div class="question-box" id="question">Loading...</div>
+  <button class="option" id="opt1"></button>
+  <button class="option" id="opt2"></button>
+
+  <div class="final" id="finalMessage">
+    🎉 You finished the quiz!!!, may all aur prayers and all our dua be accepted in ths ramadan may god forgive our sins and make us better everyday may you both and all of us be always happy and find succes in this dunya and akhirah i love u both so muchhh💖✨
+  </div>
+</div>
+
+<script>
+
+/* floating cute emojis */
+const emojis = ["💖","😊","🥰","💗","😍","💘","✨","💕","😇"];
+
+function createEmoji() {
+  const e = document.createElement("div");
+  e.classList.add("emoji");
+  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random()*100 + "vw";
+  e.style.animationDuration = (5 + Math.random()*6) + "s";
+  document.body.appendChild(e);
+
+  setTimeout(() => e.remove(), 11000);
+}
+
+setInterval(createEmoji, 500);
+
+
+/* questions */
+const quiz = [
+  {q:"aplogo ko surprise achaw dikha ? 💖", a:["Yes!! 😍","No 😭"], c:0},
+  {q:"did you like our gifts ? 🥺", a:["yess💕","No 😭"], c:0},
+  {q:"who do you love moree? 😊", a:["both(50-50) 💖","some one (40) and someone(60) 😶"], c:0},
+  {q:"kya in 10 saal mei ache memories zyada the ya bure ? ✨", a:[".. 🥰",".. 😢"], c:0},
+  {q:"who annoys you both the most ? 🎉", a:["me💃","jibrilll 😴"], c:0},
+  {q:"Did this make your day? 💗", a:["YESSS 😍","No 😭"], c:0}
+];
+
+let current = 0;
+
+const qEl = document.getElementById("question");
+const opt1 = document.getElementById("opt1");
+const opt2 = document.getElementById("opt2");
+
+function loadQ() {
+  const item = quiz[current];
+  qEl.innerText = item.q;
+  opt1.innerText = item.a[0];
+  opt2.innerText = item.a[1];
+
+  opt1.classList.remove("correct","wrong");
+  opt2.classList.remove("correct","wrong");
+}
+
+function select(i) {
+  const correct = quiz[current].c;
+
+  if(i === correct) {
+    document.querySelectorAll(".option")[i].classList.add("correct");
+  } else {
+    document.querySelectorAll(".option")[i].classList.add("wrong");
+  }
+
+  setTimeout(() => {
+    current++;
+
+    if(current >= quiz.length) {
+      document.getElementById("question").style.display = "none";
+      opt1.style.display = "none";
+      opt2.style.display = "none";
+      document.getElementById("finalMessage").style.display = "block";
+    } else {
+      loadQ();
+    }
+  }, 900);
+}
+
+opt1.onclick = () => select(0);
+opt2.onclick = () => select(1);
+
+loadQ();
+
+</script>
+
+</body>
+</html>
